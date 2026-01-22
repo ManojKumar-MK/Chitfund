@@ -1037,15 +1037,13 @@ export const Customers = () => {
                                                                             <span className="font-bold text-emerald-600 dark:text-emerald-400">₹{tx.amount.toLocaleString()}</span>
                                                                             <button
                                                                                 onClick={async () => {
-                                                                                    if (window.confirm('Are you sure you want to delete this transaction record?')) {
-                                                                                        try {
-                                                                                            await PaymentService.delete(tx.id);
-                                                                                            // Optimistic update
-                                                                                            setCustomerTransactions(prev => prev.filter(t => t.id !== tx.id));
-                                                                                        } catch (error) {
-                                                                                            console.error(error);
-                                                                                            alert('Failed to delete transaction.');
-                                                                                        }
+                                                                                    try {
+                                                                                        await PaymentService.delete(tx.id);
+                                                                                        setCustomerTransactions(prev => prev.filter(t => t.id !== tx.id));
+                                                                                        toast.success('Transaction deleted');
+                                                                                    } catch (error: any) {
+                                                                                        console.error(error);
+                                                                                        toast.error('Failed to delete transaction: ' + error.message);
                                                                                     }
                                                                                 }}
                                                                                 className="p-1 hover:bg-red-100 dark:hover:bg-red-900/30 rounded text-slate-400 hover:text-red-500 transition-colors"

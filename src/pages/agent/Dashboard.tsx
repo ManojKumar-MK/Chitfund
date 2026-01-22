@@ -1207,16 +1207,16 @@ export const AgentDashboard = () => {
                                         setCustomerToEdit(updatedCustomer);
                                         setSelectedCustomerForHistory(updatedCustomer); // Update history modal too
                                         await refreshData();
-                                        alert("Documents updated successfully!");
+                                        toast.success("Documents updated successfully!");
                                         setShowEditCustomerModal(false);
                                         setAadhaarFile(null);
                                         setPanFile(null);
                                     } else {
-                                        alert("No files selected.");
+                                        toast.error("No files selected.");
                                     }
                                 } catch (err: any) {
                                     console.error(err);
-                                    alert("Update failed: " + err.message);
+                                    toast.error("Update failed: " + err.message);
                                 } finally {
                                     setIsUploading(false);
                                 }
